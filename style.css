@@ -30,9 +30,6 @@ body{
     font-size: 2rem;
     margin-bottom: 1.5rem;
 }
-.long-quote{
-    font-size: 1rem;
-}
 
 .quote-author{
     font-size: 1.5rem;
@@ -71,6 +68,11 @@ button:active{
     justify-content: space-between;
 }
 
+
+/* helper class */
+.long-quote{
+    font-size: 1rem;
+}
 
 /* For smaller screens */
 @media screen and (max-width:1000px){
