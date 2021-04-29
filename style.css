@@ -67,8 +67,37 @@ button:active{
     display: flex;
     justify-content: space-between;
 }
+.loader{
+    font-size:2rem;
+    position:relative;
+}
+.loader::before{
+    content: "";
+    height: 3px;
+    position: absolute;
+    left: 0%;
+    right: 100%;
+    background: rgb(0, 46, 65);
+    bottom: -4px;
+    animation: loading 0.7s infinite;
+}
 
+@keyframes loading{
+    0%{
+        left: 0%;
+        right:100%;
+    }
+   
+    50%{
+        right: 0%;
+        left:0%;
+    }
 
+    100%{
+        right:0%;
+        left:100%;
+    }
+}
 /* helper class */
 .long-quote{
     font-size: 1rem;
