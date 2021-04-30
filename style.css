@@ -82,7 +82,7 @@ button:active{
     animation: loading 0.7s infinite;
 }
 .error{
-    font-size: 2rem;
+    font-size: 1rem;
 }
 @keyframes loading{
     0%{
