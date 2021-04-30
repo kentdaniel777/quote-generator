@@ -1,17 +1,21 @@
+// DOM elements
 const quoteContainer = document.getElementById("quote-container");
 const quoteText = document.getElementById("quote");
 const authorText = document.getElementById("author");
 const newQuoteBtn= document.getElementById("new-quote");
 const twitterBtn = document.getElementById("twitter");
 const loader = document.getElementById("loader");
+const errorLoading = document.getElementById("error");
+
+// global variables
+let MAX_ERROR_COUNT=10;
 
 
-
-function loading(){
+function showLoadAnim(){
     loader.hidden = false;
     quoteContainer.hidden=true;
 }
-function complete(){
+function removeLoadAnim(){
     if(!loader.hidden){
         loader.hidden = true;
     }
@@ -21,10 +25,11 @@ function complete(){
 
 
 // get quote from API
+let errorCount=0;
 async function getQuote(){
     // loads when getquote is run 
-    loading();
-
+    showLoadAnim();
+    
     const proxyUrl = 'https://guarded-peak-77488.herokuapp.com/'// to enable CORS
     const apiUrl = 'http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=json'
     try {
@@ -47,11 +52,22 @@ async function getQuote(){
         }
         quoteText.innerText=data.quoteText;
 
-        complete();// when the await functions have finished
+        
+        errorLoading.hidden=true;
+        removeLoadAnim();// when the await functions have finished
+        
+        
     }catch(err){
-        // if there's error in loading the data , try again
-      
-        getQuote();
+        // if there's error in loading the data
+        errorCount++;
+        if (errorCount<MAX_ERROR_COUNT){
+            getQuote();
+        }else{
+            errorLoading.hidden=false;
+            loader.hidden=true;
+            errorCount=0;
+        }
+        
         
     }
     
